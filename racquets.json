@@ -5,10 +5,15 @@
     "brand": "Brand A",
     "level": "Intermediate",
     "gameType": "Control",
+    "racquetType": "Round",
     "weight": "360g",
+    "foam": "Soft",
+    "material": "Carbon",
     "balance": "High",
-    "reviews": 4.5,
-    "shop": "https://example.com/shop1"
+    "surfaceType": "Rough",
+    "shop": "https://example.com/shop1",
+    "color": "Blue",
+    "reviews": 4.5
   },
   {
     "name": "Power Shot 3000",
@@ -16,10 +21,15 @@
     "brand": "Brand B",
     "level": "Advanced",
     "gameType": "Power",
+    "racquetType": "Diamond",
     "weight": "380g",
+    "foam": "Hard",
+    "material": "Graphite",
     "balance": "Medium",
-    "reviews": 4.8,
-    "shop": "https://example.com/shop2"
+    "surfaceType": "Smooth",
+    "shop": "https://example.com/shop2",
+    "color": "Red",
+    "reviews": 4.8
   },
   {
     "name": "Control Master",
@@ -27,10 +37,15 @@
     "brand": "Brand A",
     "level": "Beginner",
     "gameType": "Control",
+    "racquetType": "Round",
     "weight": "340g",
+    "foam": "Medium",
+    "material": "Fiberglass",
     "balance": "Low",
-    "reviews": 4.2,
-    "shop": "https://example.com/shop3"
+    "surfaceType": "Rough",
+    "shop": "https://example.com/shop3",
+    "color": "Green",
+    "reviews": 4.2
   },
   {
     "name": "Attack Pro",
@@ -38,10 +53,15 @@
     "brand": "Brand C",
     "level": "Advanced",
     "gameType": "Power",
+    "racquetType": "Teardrop",
     "weight": "375g",
+    "foam": "Hard",
+    "material": "Carbon Fiber",
     "balance": "High",
-    "reviews": 4.9,
-    "shop": "https://example.com/shop4"
+    "surfaceType": "Textured",
+    "shop": "https://example.com/shop4",
+    "color": "Black",
+    "reviews": 4.9
   },
   {
     "name": "Balance Hero",
@@ -49,10 +69,15 @@
     "brand": "Brand B",
     "level": "Intermediate",
     "gameType": "All-Around",
+    "racquetType": "Round",
     "weight": "355g",
+    "foam": "Soft",
+    "material": "Kevlar",
     "balance": "Medium",
-    "reviews": 4.3,
-    "shop": "https://example.com/shop5"
+    "surfaceType": "Smooth",
+    "shop": "https://example.com/shop5",
+    "color": "Orange",
+    "reviews": 4.3
   }
 ]
 
