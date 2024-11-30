@@ -12,9 +12,25 @@
             <img src="logo.png" alt="Padel Racquets Logo" style="max-width: 100px;">
         </div>
         <h1>Compare Padel Racquets</h1>
-        <p>Use the table below to find the perfect racquet for your game.</p>
+        <p>Use the filters below to find your perfect racquet!</p>
     </header>
     <main>
+        <div id="filters">
+            <label for="brand-filter">Brand:</label>
+            <select id="brand-filter"></select>
+
+            <label for="level-filter">Playing Level:</label>
+            <select id="level-filter"></select>
+
+            <label for="game-type-filter">Type of Game:</label>
+            <select id="game-type-filter"></select>
+
+            <label for="racquet-type-filter">Type of Racquet:</label>
+            <select id="racquet-type-filter"></select>
+
+            <label for="material-filter">Material:</label>
+            <select id="material-filter"></select>
+        </div>
         <div id="grid-table"></div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
