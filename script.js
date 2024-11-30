@@ -1,6 +1,20 @@
 let originalData = [];
 let grid;
 
+// List of fields for filtering
+const filterFields = [
+    { id: 'brand', label: 'Brand' },
+    { id: 'level', label: 'Playing Level' },
+    { id: 'gameType', label: 'Type of Game' },
+    { id: 'racquetType', label: 'Type of Racquet' },
+    { id: 'weight', label: 'Weight' },
+    { id: 'foam', label: 'Type of Foam' },
+    { id: 'material', label: 'Material' },
+    { id: 'balance', label: 'Balance' },
+    { id: 'surfaceType', label: 'Surface Type' },
+    { id: 'color', label: 'Color' }
+];
+
 fetch('racquets.json')
     .then(response => {
         if (!response.ok) {
@@ -10,47 +24,42 @@ fetch('racquets.json')
     })
     .then(data => {
         originalData = data; // Save the original data
-        populateFilters(data); // Populate filter dropdowns
+        createFilters(data); // Create filter dropdowns
         renderTable(data); // Render the table
     })
     .catch(error => console.error('Error loading data:', error));
 
-// Function to populate filter dropdowns
-function populateFilters(data) {
-    const filters = [
-        { id: 'brand-filter', field: 'brand' },
-        { id: 'level-filter', field: 'level' },
-        { id: 'game-type-filter', field: 'gameType' },
-        { id: 'racquet-type-filter', field: 'racquetType' },
-        { id: 'material-filter', field: 'material' }
-    ];
+// Function to dynamically create dropdown filters
+function createFilters(data) {
+    const filtersContainer = document.getElementById('filters');
 
-    filters.forEach(filter => {
-        const dropdown = document.getElementById(filter.id);
-        if (dropdown) {
-            const uniqueValues = Array.from(new Set(data.map(item => item[filter.field]))).sort();
-            dropdown.innerHTML = `<option value="all">All</option>` + uniqueValues.map(value => `<option value="${value}">${value}</option>`).join('');
-            dropdown.addEventListener('change', applyFilters);
-        } else {
-            console.error(`Dropdown with ID ${filter.id} not found.`);
-        }
+    filterFields.forEach(field => {
+        const uniqueValues = Array.from(new Set(data.map(item => item[field.id]))).sort();
+        const label = document.createElement('label');
+        label.textContent = `${field.label}:`;
+
+        const select = document.createElement('select');
+        select.id = `${field.id}-filter`;
+        select.innerHTML = `<option value="all">All</option>` +
+            uniqueValues.map(value => `<option value="${value}">${value}</option>`).join('');
+        select.addEventListener('change', applyFilters);
+
+        filtersContainer.appendChild(label);
+        filtersContainer.appendChild(select);
     });
 }
 
 // Function to apply filters and re-render the table
 function applyFilters() {
-    const brand = document.getElementById('brand-filter').value;
-    const level = document.getElementById('level-filter').value;
-    const gameType = document.getElementById('game-type-filter').value;
-    const racquetType = document.getElementById('racquet-type-filter').value;
-    const material = document.getElementById('material-filter').value;
+    const filters = filterFields.reduce((acc, field) => {
+        acc[field.id] = document.getElementById(`${field.id}-filter`).value;
+        return acc;
+    }, {});
 
     const filteredData = originalData.filter(item => {
-        return (brand === 'all' || item.brand === brand) &&
-               (level === 'all' || item.level === level) &&
-               (gameType === 'all' || item.gameType === gameType) &&
-               (racquetType === 'all' || item.racquetType === racquetType) &&
-               (material === 'all' || item.material === material);
+        return Object.keys(filters).every(key => {
+            return filters[key] === 'all' || item[key] === filters[key];
+        });
     });
 
     renderTable(filteredData);
@@ -59,12 +68,10 @@ function applyFilters() {
 // Function to render or update the Grid.js table
 function renderTable(data) {
     if (grid) {
-        // Update the existing grid
         grid.updateConfig({
             data: data.map(item => formatRow(item))
         }).forceRender();
     } else {
-        // Create the grid for the first time
         grid = new gridjs.Grid({
             columns: [
                 "Name",
