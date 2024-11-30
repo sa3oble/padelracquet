@@ -15,7 +15,6 @@ const filterFields = [
     { id: 'color', label: 'Color' }
 ];
 
-// Fetch JSON data and initialize the app
 fetch('racquets.json')
     .then(response => {
         if (!response.ok) {
@@ -35,56 +34,47 @@ function createFilters(data) {
     const filtersContainer = document.getElementById('filters');
 
     filterFields.forEach(field => {
-        // Get unique values for this field
         const uniqueValues = Array.from(new Set(data.map(item => item[field.id]))).sort();
 
-        // Create label and select elements
         const label = document.createElement('label');
         label.textContent = `${field.label}:`;
 
         const select = document.createElement('select');
         select.id = `${field.id}-filter`;
-        select.innerHTML = `<option value="all">All</option>` + 
+        select.innerHTML = `<option value="all">All</option>` +
             uniqueValues.map(value => `<option value="${value}">${value}</option>`).join('');
         
-        // Attach change event to filter data
         select.addEventListener('change', applyFilters);
 
-        // Append label and select to filters container
         filtersContainer.appendChild(label);
         filtersContainer.appendChild(select);
     });
 }
 
-// Function to filter data and re-render the table
+// Function to apply filters and re-render the table
 function applyFilters() {
-    // Get the selected values from all dropdowns
     const filters = filterFields.reduce((acc, field) => {
         const value = document.getElementById(`${field.id}-filter`).value;
-        acc[field.id] = value === 'all' ? null : value; // Use `null` for "All"
+        acc[field.id] = value === 'all' ? null : value;
         return acc;
     }, {});
 
-    // Filter the original data based on selected values
     const filteredData = originalData.filter(item => {
         return Object.entries(filters).every(([key, value]) => {
             return value === null || item[key] === value;
         });
     });
 
-    // Re-render the table with filtered data
     renderTable(filteredData);
 }
 
 // Function to render or update the Grid.js table
 function renderTable(data) {
     if (grid) {
-        // Update the table with new data
         grid.updateConfig({
             data: data.map(item => formatRow(item))
         }).forceRender();
     } else {
-        // Create the table for the first time
         grid = new gridjs.Grid({
             columns: [
                 "Name",
