@@ -20,6 +20,38 @@
     "balance": "Medium",
     "reviews": 4.8,
     "shop": "https://example.com/shop2"
+  },
+  {
+    "name": "Control Master",
+    "photo": "racquet3.jpg",
+    "brand": "Brand A",
+    "level": "Beginner",
+    "gameType": "Control",
+    "weight": "340g",
+    "balance": "Low",
+    "reviews": 4.2,
+    "shop": "https://example.com/shop3"
+  },
+  {
+    "name": "Attack Pro",
+    "photo": "racquet4.jpg",
+    "brand": "Brand C",
+    "level": "Advanced",
+    "gameType": "Power",
+    "weight": "375g",
+    "balance": "High",
+    "reviews": 4.9,
+    "shop": "https://example.com/shop4"
+  },
+  {
+    "name": "Balance Hero",
+    "photo": "racquet5.jpg",
+    "brand": "Brand B",
+    "level": "Intermediate",
+    "gameType": "All-Around",
+    "weight": "355g",
+    "balance": "Medium",
+    "reviews": 4.3,
+    "shop": "https://example.com/shop5"
   }
-  // Add more racquets as needed
 ]
