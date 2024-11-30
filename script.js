@@ -99,5 +99,21 @@ function renderTable(data) {
             item.reviews
         ]),
         search: true,
-        sor
+        sort: true,
+        pagination: {
+            enabled: true,
+            limit: 5
+        },
+        style: {
+            th: {
+                'background-color': '#4CAF50',
+                color: '#fff',
+                'text-align': 'center'
+            },
+            td: {
+                'text-align': 'center'
+            }
+        }
+    }).render(document.getElementById('grid-table'));
+}
 
