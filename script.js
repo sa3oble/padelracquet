@@ -6,7 +6,6 @@ fetch('racquets.json')
         return response.json();
     })
     .then(data => {
-        console.log('Data loaded successfully:', data);
         new gridjs.Grid({
             columns: [
                 "Name",
@@ -16,18 +15,23 @@ fetch('racquets.json')
                         gridjs.html(`<img src="${cell}" alt="Racquet Image" style="max-width:50px; height:auto;">`)
                 },
                 "Brand",
-                "Level",
-                "Game Type",
+                "Playing Level",
+                "Type of Game",
+                "Type of Racquet",
                 "Weight",
+                "Type of Foam",
+                "Material",
                 "Balance",
-                {
-                    name: "Reviews",
-                    formatter: (cell) => `${cell} ⭐`
-                },
+                "Surface Type",
                 {
                     name: "Shop",
                     formatter: (cell) =>
                         gridjs.html(`<a href="${cell}" target="_blank">Buy Now</a>`)
+                },
+                "Color",
+                {
+                    name: "Reviews",
+                    formatter: (cell) => `${cell} ⭐`
                 }
             ],
             data: data.map(item => [
@@ -36,10 +40,15 @@ fetch('racquets.json')
                 item.brand,
                 item.level,
                 item.gameType,
+                item.racquetType,
                 item.weight,
+                item.foam,
+                item.material,
                 item.balance,
-                item.reviews,
-                item.shop
+                item.surfaceType,
+                item.shop,
+                item.color,
+                item.reviews
             ]),
             search: true,
             sort: true,
