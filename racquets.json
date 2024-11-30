@@ -1,7 +1,7 @@
 [
   {
     "name": "Pro Racquet X",
-    "photo": "racquet1.jpg",
+    "photo": "https://sa3oble.github.io/padelracquet/racquet1.jpg",
     "brand": "Brand A",
     "level": "Intermediate",
     "gameType": "Control",
