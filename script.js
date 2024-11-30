@@ -1,7 +1,12 @@
-// Fetch data from the JSON file and render the Grid.js table
 fetch('racquets.json')
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Data loaded successfully:', data);
         new gridjs.Grid({
             columns: [
                 "Name",
