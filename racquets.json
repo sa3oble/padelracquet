@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Pro Racquet X",
+    "photo": "racquet1.jpg",
+    "brand": "Brand A",
+    "level": "Intermediate",
+    "gameType": "Control",
+    "weight": "360g",
+    "balance": "High",
+    "reviews": 4.5,
+    "shop": "https://example.com/shop1"
+  },
+  {
+    "name": "Power Shot 3000",
+    "photo": "racquet2.jpg",
+    "brand": "Brand B",
+    "level": "Advanced",
+    "gameType": "Power",
+    "weight": "380g",
+    "balance": "Medium",
+    "reviews": 4.8,
+    "shop": "https://example.com/shop2"
+  }
+  // Add more racquets as needed
+]
