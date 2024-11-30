@@ -62,7 +62,7 @@ function applyFilters() {
         });
     });
 
-    renderTable(filteredData);
+    renderTable(filteredData.length > 0 ? filteredData : originalData); // Fallback to original data if no match
 }
 
 // Function to render or update the Grid.js table
