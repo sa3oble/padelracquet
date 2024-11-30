@@ -1,7 +1,7 @@
 let originalData = [];
 let grid;
 
-// List of fields for filtering
+// Fields to filter by
 const filterFields = [
     { id: 'brand', label: 'Brand' },
     { id: 'level', label: 'Playing Level' },
@@ -15,6 +15,7 @@ const filterFields = [
     { id: 'color', label: 'Color' }
 ];
 
+// Fetch JSON data and initialize the app
 fetch('racquets.json')
     .then(response => {
         if (!response.ok) {
@@ -24,54 +25,66 @@ fetch('racquets.json')
     })
     .then(data => {
         originalData = data; // Save the original data
-        createFilters(data); // Create filter dropdowns
-        renderTable(data); // Render the table
+        createFilters(data); // Create dropdown filters
+        renderTable(data); // Render the initial table
     })
     .catch(error => console.error('Error loading data:', error));
 
-// Function to dynamically create dropdown filters
+// Function to create dropdown filters dynamically
 function createFilters(data) {
     const filtersContainer = document.getElementById('filters');
 
     filterFields.forEach(field => {
+        // Get unique values for this field
         const uniqueValues = Array.from(new Set(data.map(item => item[field.id]))).sort();
+
+        // Create label and select elements
         const label = document.createElement('label');
         label.textContent = `${field.label}:`;
 
         const select = document.createElement('select');
         select.id = `${field.id}-filter`;
-        select.innerHTML = `<option value="all">All</option>` +
+        select.innerHTML = `<option value="all">All</option>` + 
             uniqueValues.map(value => `<option value="${value}">${value}</option>`).join('');
+        
+        // Attach change event to filter data
         select.addEventListener('change', applyFilters);
 
+        // Append label and select to filters container
         filtersContainer.appendChild(label);
         filtersContainer.appendChild(select);
     });
 }
 
-// Function to apply filters and re-render the table
+// Function to filter data and re-render the table
 function applyFilters() {
+    // Get the selected values from all dropdowns
     const filters = filterFields.reduce((acc, field) => {
-        acc[field.id] = document.getElementById(`${field.id}-filter`).value;
+        const value = document.getElementById(`${field.id}-filter`).value;
+        acc[field.id] = value === 'all' ? null : value; // Use `null` for "All"
         return acc;
     }, {});
 
+    // Filter the original data based on selected values
     const filteredData = originalData.filter(item => {
-        return Object.keys(filters).every(key => {
-            return filters[key] === 'all' || item[key] === filters[key];
+        return Object.entries(filters).every(([key, value]) => {
+            return value === null || item[key] === value;
         });
     });
 
-    renderTable(filteredData.length > 0 ? filteredData : originalData); // Fallback to original data if no match
+    // Re-render the table with filtered data
+    renderTable(filteredData);
 }
 
 // Function to render or update the Grid.js table
 function renderTable(data) {
     if (grid) {
+        // Update the table with new data
         grid.updateConfig({
             data: data.map(item => formatRow(item))
         }).forceRender();
     } else {
+        // Create the table for the first time
         grid = new gridjs.Grid({
             columns: [
                 "Name",
