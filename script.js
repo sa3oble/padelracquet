@@ -40,4 +40,96 @@ function populateFilters(data) {
 // Function to apply filters and re-render the table
 function applyFilters() {
     const brand = document.getElementById('brand-filter').value;
-    const level = docume
+    const level = document.getElementById('level-filter').value;
+    const gameType = document.getElementById('game-type-filter').value;
+    const racquetType = document.getElementById('racquet-type-filter').value;
+    const material = document.getElementById('material-filter').value;
+
+    const filteredData = originalData.filter(item => {
+        return (brand === 'all' || item.brand === brand) &&
+               (level === 'all' || item.level === level) &&
+               (gameType === 'all' || item.gameType === gameType) &&
+               (racquetType === 'all' || item.racquetType === racquetType) &&
+               (material === 'all' || item.material === material);
+    });
+
+    renderTable(filteredData);
+}
+
+// Function to render or update the Grid.js table
+function renderTable(data) {
+    if (grid) {
+        // Update the existing grid
+        grid.updateConfig({
+            data: data.map(item => formatRow(item))
+        }).forceRender();
+    } else {
+        // Create the grid for the first time
+        grid = new gridjs.Grid({
+            columns: [
+                "Name",
+                {
+                    name: "Photo",
+                    formatter: (cell) =>
+                        gridjs.html(`<img src="${cell}" alt="Racquet Image" style="max-width:50px; height:auto;">`)
+                },
+                "Brand",
+                "Playing Level",
+                "Type of Game",
+                "Type of Racquet",
+                "Weight",
+                "Type of Foam",
+                "Material",
+                "Balance",
+                "Surface Type",
+                {
+                    name: "Shop",
+                    formatter: (cell) =>
+                        gridjs.html(`<a href="${cell}" target="_blank">Buy Now</a>`)
+                },
+                "Color",
+                {
+                    name: "Reviews",
+                    formatter: (cell) => `${cell} ⭐`
+                }
+            ],
+            data: data.map(item => formatRow(item)),
+            search: true,
+            sort: true,
+            pagination: {
+                enabled: true,
+                limit: 5
+            },
+            style: {
+                th: {
+                    'background-color': '#4CAF50',
+                    color: '#fff',
+                    'text-align': 'center'
+                },
+                td: {
+                    'text-align': 'center'
+                }
+            }
+        }).render(document.getElementById('grid-table'));
+    }
+}
+
+// Helper function to format data rows for the table
+function formatRow(item) {
+    return [
+        item.name,
+        item.photo,
+        item.brand,
+        item.level,
+        item.gameType,
+        item.racquetType,
+        item.weight,
+        item.foam,
+        item.material,
+        item.balance,
+        item.surfaceType,
+        item.shop,
+        item.color,
+        item.reviews
+    ];
+}
