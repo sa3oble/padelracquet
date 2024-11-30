@@ -17,7 +17,7 @@
   },
   {
     "name": "Power Shot 3000",
-    "photo": "racquet2.jpg",
+    "photo": "https://sa3oble.github.io/padelracquet/racquet2.jpg",
     "brand": "Brand B",
     "level": "Advanced",
     "gameType": "Power",
@@ -33,7 +33,7 @@
   },
   {
     "name": "Control Master",
-    "photo": "racquet3.jpg",
+    "photo": "https://sa3oble.github.io/padelracquet/racquet3.jpg",
     "brand": "Brand A",
     "level": "Beginner",
     "gameType": "Control",
@@ -49,7 +49,7 @@
   },
   {
     "name": "Attack Pro",
-    "photo": "racquet4.jpg",
+    "photo": "https://sa3oble.github.io/padelracquet/racquet4.jpg",
     "brand": "Brand C",
     "level": "Advanced",
     "gameType": "Power",
@@ -65,7 +65,7 @@
   },
   {
     "name": "Balance Hero",
-    "photo": "racquet5.jpg",
+    "photo": "https://sa3oble.github.io/padelracquet/racquet5.jpg",
     "brand": "Brand B",
     "level": "Intermediate",
     "gameType": "All-Around",
